@@ -1,8 +1,10 @@
 const Router = require('@koa/router');
 
+
 const router = new Router();
 
 const userRouter = require('./users');
+const productsRouter = require('./products');
 
 router
   .get('/api', async (ctx, next) => {
@@ -43,6 +45,7 @@ router
     return '?'
   })
   //多个前缀
-  .use(['/users', '/admins'], userRouter.routes(), userRouter.allowedMethods());
+  .use(['/users', '/admins'], userRouter.routes(), userRouter.allowedMethods())
+  .use(['/products'], productsRouter.routes(), productsRouter.allowedMethods())
 
 module.exports = router;
